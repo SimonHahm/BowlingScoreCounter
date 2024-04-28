@@ -1,7 +1,9 @@
 public class Frame {
+    private static final int NUMBER_OF_PINS = 10;
+
     private int score;
-    private boolean strike;
-    private boolean spare;
+    private boolean strike = false;
+    private boolean spare = false;
 
     /**
      * Creates a new Frame, and needs the number of pins knocked over.
@@ -9,7 +11,12 @@ public class Frame {
      * @param throw2 number of pins knocked over in the second throw
      */
     Frame(int throw1, int throw2) {
-
+        score = throw1 + throw2;
+        if (throw1 == NUMBER_OF_PINS) {
+            strike = true;
+        } else if (throw1 + throw2 == NUMBER_OF_PINS) {
+            spare = true;
+        }
     }
 
     /**

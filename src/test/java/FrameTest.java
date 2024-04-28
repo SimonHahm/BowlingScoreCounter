@@ -7,6 +7,15 @@ class FrameTest {
     public void testConstructor() {
         Frame testFrame = new Frame(4,2);
         assertEquals(6,testFrame.getScore());
+
+        Frame testFrame2 = new Frame(4,6);  //spare
+        assertEquals(10,testFrame2.getScore());
+
+        Frame testFrame3 = new Frame(0,0);  //gutter
+        assertEquals(0, testFrame3.getScore());
+
+        Frame testFrame4 = new Frame(10,0); //strike
+        assertEquals(10, testFrame4.getScore());
     }
 
     @Test
