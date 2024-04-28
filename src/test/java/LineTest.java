@@ -32,19 +32,19 @@ class LineTest {
         Line line = new Line();
         line.setFrames(new ArrayList<>(List.of()));
 
-        line.frameScoreCalc(new int[]{10,0});
+        line.processFrame(new int[]{10,0});
         assertEquals(10, line.getFrames().get(0).getScore());
 
-        line.frameScoreCalc(new int[]{10,0});
+        line.processFrame(new int[]{10,0});
         assertEquals(10, line.getFrames().get(1).getScore());
         assertEquals(20, line.getFrames().get(0).getScore());
 
-        line.frameScoreCalc(new int[]{10,0});
+        line.processFrame(new int[]{10,0});
         assertEquals(10, line.getFrames().get(2).getScore());
         assertEquals(20, line.getFrames().get(1).getScore());
         assertEquals(30, line.getFrames().get(0).getScore());
 
-        line.frameScoreCalc(new int[]{10,0});
+        line.processFrame(new int[]{10,0});
         assertEquals(10, line.getFrames().get(3).getScore());
         assertEquals(20, line.getFrames().get(2).getScore());
         assertEquals(30, line.getFrames().get(1).getScore());
@@ -54,18 +54,33 @@ class LineTest {
     @Test
     public void scoreCalcTest() {
         Line line = new Line();
-        line.setFrames(new ArrayList<>(List.of()));
 
-        line.frameScoreCalc(new int[]{6,2});
+        line.processFrame(new int[]{6,2});
         assertEquals(8, line.getFrames().get(0).getScore());
 
-        line.frameScoreCalc(new int[]{5,5});
+        line.processFrame(new int[]{5,5});
         assertEquals(10, line.getFrames().get(1).getScore());
         assertEquals(8, line.getFrames().get(0).getScore());
 
-        line.frameScoreCalc(new int[]{7,0});
+        line.processFrame(new int[]{7,0});
         assertEquals(7, line.getFrames().get(2).getScore());
         assertEquals(17, line.getFrames().get(1).getScore());
         assertEquals(8, line.getFrames().get(0).getScore());
+    }
+
+    @Test
+    public void processWholeLineTest() {
+        Line line1 = new Line();
+        line1.processWholeLine("x x x x x x x x x x x x");
+        assertEquals(300, line1.getLineScore());
+
+        Line line2 = new Line();
+        line2.processWholeLine("x 8- 4/ 3/ 5/ 31 53 x 45 16");
+        assertEquals(114, line2.getLineScore());
+
+        Line line3 = new Line();
+        line3.processWholeLine("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5");
+        assertEquals(150, line3.getLineScore());
+
     }
 }
