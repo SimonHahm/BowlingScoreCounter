@@ -71,10 +71,10 @@ public class Line {
                 //last frame was spare, hence add score of first roll to last frame
                 frames.get(frameNumber - 1).addScore(scoreCurrentFrame[0]);
             }
-        } else if (frameNumber == 10) { //if the ninth frame is a strike, the score of the 11th frame is added.
-            if (frames.get(frameNumber - 2).isStrike()) {
-                frames.get(frameNumber - 2).addScore(currentFrame.getScore());
-            }
+        } else if (frameNumber == 10 && frames.get(frameNumber - 1).isStrike()) { //special case "frame 11"
+            //10th frame was strike
+            frames.get(frameNumber - 2).addScore(scoreCurrentFrame[0]);
+
         }
     }
 
@@ -106,6 +106,10 @@ public class Line {
                     //both rolls in 1-9
                     return new int[]{roll1, Character.getNumericValue(input.charAt(1))};
                 }
+            }
+        } else if (input.length() == 1) { //this is a special case for the last roll if the 10th frame was a strike
+            if (Character.getNumericValue(input.charAt(0)) >= 1 && Character.getNumericValue(input.charAt(0)) <= 9) {
+                return new int[]{Character.getNumericValue(input.charAt(0)), 0};
             }
         }
         System.out.println("Ungültige Eingabe! Wird als 0 Punkte gewertet!"); //may be changed to throw an exception

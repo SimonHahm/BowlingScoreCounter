@@ -70,7 +70,7 @@ class LineTest {
 
     @Test
     public void processWholeLineTest() {
-        Line line1 = new Line();
+       Line line1 = new Line();
         line1.processWholeLine("x x x x x x x x x x x x");
         assertEquals(300, line1.getLineScore());
 
@@ -93,5 +93,9 @@ class LineTest {
         Line line6 = new Line();
         line6.processWholeLine("25 72 9- 5- 7/ 24 7/ -- -- 37 x");
         assertEquals(78, line6.getLineScore());
+
+        Line line7 = new Line();
+        line7.processWholeLine("4/ 40 81 71 52 8/ x x x x 42");
+        assertEquals(162, line7.getLineScore());
     }
 }
