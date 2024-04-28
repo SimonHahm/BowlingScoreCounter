@@ -7,8 +7,8 @@ public class Line {
     private static final char SPARE = '/';
     private static final int STATUS_OK = 0;
 
-    private ArrayList<Frame> frames = new ArrayList<>();
 
+    private ArrayList<Frame> frames = new ArrayList<>();
     private int lineScore = 0;
 
 
@@ -78,6 +78,13 @@ public class Line {
         }
     }
 
+    /**
+     * converts the input, that may contain special characters like '/' or '-' into an int[] with the number of pins
+     * knocked over in the two rolls of one frame.
+     *
+     * @param input the input String for one frame
+     * @return an int[] array containing the number of pins that were knocked over
+     */
     static int[] parseInput(String input) {
         if (input.equalsIgnoreCase(STRIKE)) {
             //strike: that means the first roll knocked all pins over.
@@ -116,6 +123,9 @@ public class Line {
         return new int[]{0, 0}; //This statement is only reached, if invalid input is given.
     }
 
+    /**
+     * Adds the score of all the frames to calculate the score of the whole line.
+     */
     private void calculateScore() {
         lineScore = 0;
         for (Frame frame : frames) { //should I create a testcase for this function?
