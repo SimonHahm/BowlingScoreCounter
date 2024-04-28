@@ -2,7 +2,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Line {
-    private ArrayList<Frame> Frames = new ArrayList<>();
+    private static final String STRIKE = "X";
+    private static final char NO_SCORE = '-';
+    private static final char SPARE = '/';
+    private static final int STATUS_OK = 0;
+
+    private ArrayList<Frame> frames = new ArrayList<>();
 
     private int lineScore = 0;
 
@@ -74,15 +79,15 @@ public class Line {
     }
 
     static int[] parseInput(String input) {
-        if (input.equalsIgnoreCase("X")) {
+        if (input.equalsIgnoreCase(STRIKE)) {
             //strike: that means the first roll knocked all pins over.
             return new int[]{10, 0};
         } else if (input.length() == 2) {
-            if (input.charAt(0) == '-') {
-                if (input.charAt(1) == '-') {
+            if (input.charAt(0) == NO_SCORE) {
+                if (input.charAt(1) == NO_SCORE) {
                     //Gutter: that means both rolls are misses.
                     return new int[]{0, 0};
-                } else if (input.charAt(1) == '/') {
+                } else if (input.charAt(1) == SPARE) {
                     //spare: that means the sum of the rolls is 10, but first rol is less than 10.
                     return new int[]{0, 10};
                 } else {
@@ -91,10 +96,10 @@ public class Line {
                 }
             } else {    //first roll is in 1-9
                 int roll1 = Character.getNumericValue(input.charAt(0)); //maybe hard to read, but shorter
-                if (input.charAt(1) == '-') {
+                if (input.charAt(1) == NO_SCORE) {
                     //first roll in 1-9 and second roll: -
                     return new int[]{roll1, 0};
-                } else if( input.charAt(1) == '/') {
+                } else if (input.charAt(1) == SPARE) {
                     //spare
                     return new int[]{roll1, 10 - roll1};
                 } else {
@@ -103,7 +108,7 @@ public class Line {
                 }
             }
         }
-        System.out.println("Invalid input. Is counted as no score"); //may be changed to throw an exception
+        System.out.println("Ungültige Eingabe! Wird als 0 Punkte gewertet!"); //may be changed to throw an exception
         return new int[]{0, 0}; //This statement is only reached, if invalid input is given.
     }
 
