@@ -82,5 +82,16 @@ class LineTest {
         line3.processWholeLine("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5");
         assertEquals(150, line3.getLineScore());
 
+        Line line4 = new Line();
+        line4.processWholeLine("9- 9- 9- 9- 9- 9- 9- 9- 9- 9-");
+        assertEquals(90, line4.getLineScore());
+
+        Line line5 = new Line();
+        line5.processWholeLine("44 3/ 35 15 81 71 x -4 2/ 7/ 6");
+        assertEquals(103, line5.getLineScore());
+
+        Line line6 = new Line();
+        line6.processWholeLine("25 72 9- 5- 7/ 24 7/ -- -- 37 x");
+        assertEquals(78, line6.getLineScore());
     }
 }
